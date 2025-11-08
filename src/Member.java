@@ -1,3 +1,4 @@
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,12 +15,6 @@ public  class Member  {
         this.id = id;
         this.name = name;
     }
-
-
-    public Set<String> getBorrowedBookIds() {
-        return borrowedBookIds;
-    }
-
     public String getName() {
         return name;
     }
@@ -27,6 +22,14 @@ public  class Member  {
     public String getId() {
         return id;
     }
+
+
+    // IMPORTANT: do not expose internal mutable set directly
+    // Better return unmodifiable view to protect internal state
+    public Set<String> getBorrowedBookIds() {
+        return Collections.unmodifiableSet(borrowedBookIds);
+    }
+
 
 
     public  void  borrowBook(String bookId){
